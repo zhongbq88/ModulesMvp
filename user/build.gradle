@@ -1,0 +1,5 @@
+ext.runAsApp = rootProject.ext.android.userIsApp
+apply from: rootProject.file('module-settings.gradle')
+
+dependencies {
+}

@@ -1,0 +1,87 @@
+
+
+//先读取build.gradle中的ext.runAsApp设置
+def runAsApp = ext.has('runAsApp')
+if (runAsApp) {
+    runAsApp = ext.runAsApp
+} else {
+    //再读取local.properties中配置，例如： demo_component_a=true
+    Properties localProperties = new Properties()
+    try {
+        def localFile = project.rootProject.file('local.properties')
+        if (localFile != null && localFile.exists()) {
+            localProperties.load(localFile.newDataInputStream())
+        }
+    } catch (Exception ignored) {
+    }
+    runAsApp = 'true' == localProperties.getProperty(project.name)
+}
+//设置到ext中，供module的build.gradle使用（例如用于设置sourceSets配置）
+ext.runAsApp = runAsApp
+if (runAsApp) {
+    apply plugin: 'com.android.application'
+    apply plugin: 'com.hujiang.android-aspectjx'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+//默认配置了AndroidManifest.xml在library模式和application模式下的文件路径
+android {
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        if (runAsApp) {
+            applicationId rootProject.ext.android.applicationId + "."+project.name
+        }
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+                arguments = ["moduleName": project.name]
+            }
+        }
+    }
+
+    sourceSets {
+        main {
+            //默认的作为application运行时Manifest文件路径
+            def debugManifest = 'src/main/debug/AndroidManifest.xml'
+            if (runAsApp && project.file(debugManifest).exists()) {
+                manifest.srcFile debugManifest
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                //集成开发模式下自动排除debug文件夹中的所有Java文件
+                // 可以将debug代码放在这个包内，例如：Application子类
+                java {
+                    exclude 'debug/**'
+                }
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    buildToolsVersion '26.0.2'
+}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':library:baselibrary')
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+}

@@ -1,0 +1,8 @@
+ext.runAsApp = rootProject.ext.android.loginIsApp
+apply from: rootProject.file('module-settings.gradle')
+
+dependencies {
+    /*if (!rootProject.ext.android.userIsApp) {
+        compile project(':user')
+    }*/
+}

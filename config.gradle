@@ -1,0 +1,20 @@
+ext {
+    android = [
+            compileSdkVersion: 26,
+            buildToolsVersion: "26.0.0",
+            minSdkVersion    : 15,
+            targetSdkVersion : 25,
+            versionCode      : 1,
+            versionName      : "1.0.0",
+            applicationId    : "com.zbq.demo",
+            isModule         : true,
+            baseLibraryIsApp : false,
+            loginIsApp       : false,
+            userIsApp        : false,
+            isDebug          : "true",
+            scheme           : "\"zdemo\""
+    ]
+    dependencies = [
+            "supportVersion": "26.+"
+    ]
+}

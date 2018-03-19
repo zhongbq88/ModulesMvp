@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ModulesApp.iml" filepath="$PROJECT_DIR$/ModulesApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/annotation/annotation.iml" filepath="$PROJECT_DIR$/library/annotation/annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/library/baselibrary/baselibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/compiler/compiler.iml" filepath="$PROJECT_DIR$/library/compiler/compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://G:\project\ModulesApp\library\plugin\library-plugin.iml" filepath="G:\project\ModulesApp\library\plugin\library-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/login/login.iml" filepath="$PROJECT_DIR$/login/login.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user/user.iml" filepath="$PROJECT_DIR$/user/user.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,31 @@
+apply from: "config.gradle"
+apply plugin: 'com.alibaba.arouter'
+
+buildscript {
+    ext.kotlin_version = '1.1.4-2'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath "com.alibaba:arouter-register:1.0.0"
+        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:1.1.1'
+        classpath 'org.aspectj:aspectjtools:1.8.13'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+//不加这一句MakeProject会报错，其余都正常无影响
+task compileJava {}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
